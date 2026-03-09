@@ -13,7 +13,3 @@ confirmed.
 Consider adding mkdocs-material + mkdocstrings for a hosted API reference
 (same pattern as opennms-api-wrapper with Read the Docs).
 
-## GitHub remote
-
-Create the `cnewkirk/suzieq-api-wrapper` repo on GitHub, push, and update
-badge URLs in `README.md`.
