@@ -75,9 +75,8 @@ except suzieq.SuzieQError:
 
 ## Authentication
 
-SuzieQ uses API key authentication.  Generate a key with
-`openssl rand -hex 20` and set it as `rest.API_KEY` in
-`~/.suzieq/suzieq.cfg`.
+SuzieQ uses API key authentication.  Configure your API key via the
+SuzieQ web UI or in `~/.suzieq/suzieq.cfg`.
 
 Pass `verify_ssl=False` to disable certificate verification (useful for
 self-signed certs in lab environments):
