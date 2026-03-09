@@ -10,6 +10,7 @@ cd suzieq-api-wrapper
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
+pre-commit install          # optional, runs ruff on each commit
 ```
 
 ## Running the tests
