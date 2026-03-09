@@ -1,14 +1,8 @@
-# DISABLED: PyPI OIDC trusted publisher not yet configured.
-# Re-enable the trigger and configure the publisher on pypi.org once
-# account access is restored.  See TODO.md.
-#
-# on:
-#   release:
-#     types: [published]
-
 name: Publish to PyPI
 
-on: workflow_dispatch  # manual-only until PyPI is configured
+on:
+  release:
+    types: [published]
 
 jobs:
   build:
