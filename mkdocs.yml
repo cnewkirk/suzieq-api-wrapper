@@ -1,0 +1,48 @@
+site_name: suzieq-api-wrapper
+site_description: A thin Python wrapper for the SuzieQ REST API (v2)
+site_url: https://cnewkirk.github.io/suzieq-api-wrapper/
+repo_url: https://github.com/cnewkirk/suzieq-api-wrapper
+repo_name: cnewkirk/suzieq-api-wrapper
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [.]
+          options:
+            inherited_members: true
+            filters: ["!^_"]
+            members_order: alphabetical
+            show_source: false
+            docstring_style: google
+            show_root_heading: true
+            show_root_full_path: false
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+
+nav:
+  - Home: index.md
+  - API Reference: api.md

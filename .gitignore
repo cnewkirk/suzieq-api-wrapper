@@ -38,5 +38,5 @@ coverage.xml
 # macOS
 .DS_Store
 
-# Distribution
-dist/
+# Docs
+_site/

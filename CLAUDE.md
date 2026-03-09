@@ -52,7 +52,14 @@ tests/
 .github/
     workflows/
         ci.yml          # test matrix (3.8–3.13), coverage, lint, build
+        docs.yml        # mkdocs build + GitHub Pages deploy
         publish.yml     # PyPI OIDC trusted publishing on GitHub release
+
+docs/
+    index.md            # docs site homepage
+    api.md              # auto-generated API reference (mkdocstrings)
+
+mkdocs.yml              # mkdocs-material configuration
 
 pyproject.toml          # build config + project metadata
 smoke_test.py           # live-server smoke test (read-only, always safe)

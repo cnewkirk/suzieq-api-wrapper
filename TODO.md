@@ -8,8 +8,8 @@ Items deferred for a future session.
 Run it against a dev instance and update the README validation note once
 confirmed.
 
-## Documentation site
+## GitHub Pages setup
 
-Consider adding mkdocs-material + mkdocstrings for a hosted API reference
-(same pattern as opennms-api-wrapper with Read the Docs).
-
+Enable GitHub Pages on the `cnewkirk/suzieq-api-wrapper` repository
+(Settings > Pages > Source: GitHub Actions) so the docs workflow deploys
+automatically.
