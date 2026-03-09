@@ -39,11 +39,20 @@ suzieq_api_wrapper/     # installable package
     _topology.py        # TopologyMixin
     _vlan.py            # VlanMixin
 
+    py.typed            # PEP 561 marker for typed package
+
 tests/
+    __init__.py
     conftest.py         # client fixture, API URL constant, qs() helper
     fixtures.py         # accurate SuzieQ response shapes
+    test_base.py        # base class / exception tests
     test_bgp.py         # complete test file (use as template)
     test_*.py           # one file per mixin
+
+.github/
+    workflows/
+        ci.yml          # test matrix (3.8–3.13), coverage, lint, build
+        publish.yml     # PyPI OIDC trusted publishing on GitHub release
 
 pyproject.toml          # build config + project metadata
 smoke_test.py           # live-server smoke test (read-only, always safe)
@@ -52,9 +61,17 @@ smoke_test.py           # live-server smoke test (read-only, always safe)
                         #   python smoke_test.py --skip show_path,show_fs
                         #   env vars: SUZIEQ_URL, SUZIEQ_API_KEY,
                         #            SUZIEQ_VERIFY_SSL, SUZIEQ_TIMEOUT
+.gitignore
+.pre-commit-config.yaml # ruff hook
+ARCHITECTURE.md         # architecture decision records (ADRs)
 CHANGELOG.md
 CLAUDE.md
+CONTRIBUTING.md
 LICENSE
+MERMAID.md              # Mermaid architecture diagrams
+README.md
+SECURITY.md
+TODO.md
 ```
 
 ## Architecture decisions (do not change without good reason)
@@ -129,11 +146,16 @@ Always activate the `.venv` before running any commands.
 
 ## Build / release
 
+PyPI publishing is **automated** via `.github/workflows/publish.yml`.  It
+triggers on every GitHub release (`on: release: [published]`) and uses OIDC
+trusted publishing — no API token or manual `twine upload` needed.
+
 Release checklist:
 1. Bump `version` in `pyproject.toml`.
 2. Add a changelog entry in `CHANGELOG.md`.
 3. Commit on a branch, open a PR, merge to `main`.
-4. `gh release create vX.Y.Z`.
+4. `gh release create vX.Y.Z` — the publish workflow builds and uploads
+   to PyPI automatically.
 
 ## Git workflow
 

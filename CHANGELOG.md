@@ -4,7 +4,8 @@
 
 Initial release.  21 table mixins with full verb coverage:
 
-- **show** / **summarize** / **unique** / **top** — all 21 tables
+- **show** / **summarize** / **top** — all 21 tables
+- **unique** — all tables except `devconfig`
 - **assert** — `bgp`, `evpnVni`, `interface`, `ospf`
 - **lpm** — `route`
 - **find** — `network`
