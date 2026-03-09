@@ -38,7 +38,6 @@ suzieq_api_wrapper/     # installable package
     _table.py           # TablesMixin
     _topology.py        # TopologyMixin
     _vlan.py            # VlanMixin
-
     py.typed            # PEP 561 marker for typed package
 
 tests/
@@ -50,8 +49,14 @@ tests/
     test_*.py           # one file per mixin
 
 .github/
+    ISSUE_TEMPLATE/
+        bug_report.yml      # structured bug report form
+        config.yml          # disables blank issues, links to SuzieQ docs
+        feature_request.yml # structured feature request form
+    dependabot.yml          # weekly updates for pip and GitHub Actions
+    pull_request_template.md  # PR checklist (tests, lint, no new deps)
     workflows/
-        ci.yml          # test matrix (3.8–3.13), coverage, lint, build
+        ci.yml          # test matrix (3.8–3.13), coverage (95% min), lint, build
         docs.yml        # mkdocs build + GitHub Pages deploy
         publish.yml     # PyPI OIDC trusted publishing on GitHub release
 
@@ -60,7 +65,6 @@ docs/
     api.md              # auto-generated API reference (mkdocstrings)
 
 mkdocs.yml              # mkdocs-material configuration
-
 pyproject.toml          # build config + project metadata
 smoke_test.py           # live-server smoke test (read-only, always safe)
                         #   python smoke_test.py
@@ -130,11 +134,15 @@ TODO.md
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -e ".[dev]"   # installs requests + pytest + responses
+pip install -e ".[dev]"
 pytest tests/ -v
 ```
 
 Always activate the `.venv` before running any commands.
+
+Dev dependencies (installed via `pip install -e ".[dev]"`):
+`pytest`, `pytest-cov`, `responses`, `mkdocs-material`,
+`mkdocstrings[python]`, `ruff`, `mypy`.
 
 ## Test conventions
 
@@ -151,6 +159,33 @@ Always activate the `.venv` before running any commands.
 - List params (`namespace`, `hostname`, etc.) repeat the key:
   `?namespace=dc1&namespace=dc2` → use `responses` + `qs()` to verify.
 
+## CI / CD
+
+Three GitHub Actions workflows:
+
+### `ci.yml` — runs on push/PR to `main`
+- **Test matrix**: Python 3.8, 3.9, 3.10, 3.11, 3.12, 3.13.
+- **Coverage**: `pytest --cov --cov-fail-under=95` — CI fails if coverage
+  drops below 95%.  Coverage XML is uploaded to Codecov.
+- **Lint**: `ruff check suzieq_api_wrapper/`.
+- **Build**: `python -m build` to verify sdist and wheel build cleanly.
+
+### `docs.yml` — runs on push/PR to `main` + manual dispatch
+- Builds the mkdocs-material site.
+- Deploys to GitHub Pages on push to `main` (skipped on PRs).
+- Site: https://cnewkirk.github.io/suzieq-api-wrapper/
+
+### `publish.yml` — runs on GitHub release
+- Builds sdist + wheel, uploads to PyPI via OIDC trusted publishing.
+- No API token needed — uses GitHub's `id-token: write` permission.
+- PyPI trusted publisher configured for:
+  - Owner: `cnewkirk`, Repo: `suzieq-api-wrapper`
+  - Workflow: `publish.yml`, Environment: `pypi`
+
+### Dependabot
+- `.github/dependabot.yml` monitors pip dependencies and GitHub Actions
+  versions on a weekly schedule.  PRs are opened automatically.
+
 ## Build / release
 
 PyPI publishing is **automated** via `.github/workflows/publish.yml`.  It
@@ -164,10 +199,35 @@ Release checklist:
 4. `gh release create vX.Y.Z` — the publish workflow builds and uploads
    to PyPI automatically.
 
+To build locally (e.g. for inspection):
+
+```bash
+pip install build
+python -m build          # produces dist/*.tar.gz and dist/*.whl
+```
+
+The build backend is `setuptools.build_meta` (in `pyproject.toml`).
+
+## GitHub repository settings
+
+- **Branch ruleset** on `main`:
+  - No deletion, no force push, PRs required.
+  - Repo admin (owner) can bypass for solo merges.
+- **GitHub Pages**: deployed via GitHub Actions (`docs.yml`).
+  Source: Actions (not branch-based).
+- **Dependabot**: enabled for pip and github-actions ecosystems.
+- **Issue templates**: bug report and feature request (blank issues disabled).
+- **PR template**: checklist for tests, lint, and no new runtime deps.
+- **Codecov**: coverage uploaded from CI; token stored as `CODECOV_TOKEN`
+  secret (optional — `fail_ci_if_error: false`).
+
 ## Git workflow
 
 - **Never push directly to `main`.**  All changes go through a branch + PR.
-- Branch naming: `feature/<topic>`, `fix/<topic>`, `docs/<topic>`, etc.
+- Branch naming: `feature/<topic>`, `fix/<topic>`, `docs/<topic>`,
+  `chore/<topic>`, etc.
+- Commit on the branch, push, open a PR with `gh pr create`, and merge
+  once CI is green.
 
 ## Style
 
@@ -175,3 +235,5 @@ Release checklist:
 - Every public method has a Google-style docstring with `Args:` and
   `Returns:` sections.
 - No inline comments on self-evident code.
+- No error handling for scenarios that cannot happen.
+- No abstractions introduced for one-off operations.
