@@ -21,8 +21,8 @@ class _SuzieQBase:
         Args:
             url: Base URL of the SuzieQ REST server
                 (e.g. ``"https://127.0.0.1:8000"``).
-            api_key: SuzieQ API key configured as ``rest.API_KEY`` in
-                ``~/.suzieq/suzieq.cfg``.
+            api_key: SuzieQ API key, configured via the SuzieQ web UI
+                or as ``rest.API_KEY`` in ``~/.suzieq/suzieq.cfg``.
             verify_ssl: When ``False`` SSL certificate verification is
                 disabled.  Defaults to ``True``.  Set to ``False`` for
                 self-signed certs in dev/test environments.
