@@ -46,8 +46,15 @@ tests/
     test_*.py           # one file per mixin
 
 pyproject.toml          # build config + project metadata
+smoke_test.py           # live-server smoke test (read-only, always safe)
+                        #   python smoke_test.py
+                        #   python smoke_test.py --no-color
+                        #   python smoke_test.py --skip show_path,show_fs
+                        #   env vars: SUZIEQ_URL, SUZIEQ_API_KEY,
+                        #            SUZIEQ_VERIFY_SSL, SUZIEQ_TIMEOUT
 CHANGELOG.md
 CLAUDE.md
+LICENSE
 ```
 
 ## Architecture decisions (do not change without good reason)
