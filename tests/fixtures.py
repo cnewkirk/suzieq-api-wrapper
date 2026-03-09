@@ -217,6 +217,190 @@ TOPOLOGY_SHOW = [
 ]
 
 # ---------------------------------------------------------------------------
+# devconfig
+# ---------------------------------------------------------------------------
+
+DEVCONFIG_SHOW = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "config": "interface swp1\n  description uplink\n",
+        "timestamp": 1700000000000,
+    }
+]
+
+# ---------------------------------------------------------------------------
+# evpnVni
+# ---------------------------------------------------------------------------
+
+EVPNVNI_SHOW = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "vni": 10100,
+        "type": "L2",
+        "priVtepIp": "10.0.1.1",
+        "state": "up",
+        "timestamp": 1700000000000,
+    }
+]
+
+EVPNVNI_ASSERT = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "vni": 10100,
+        "assertReason": [],
+        "assert": "pass",
+        "timestamp": 1700000000000,
+    }
+]
+
+# ---------------------------------------------------------------------------
+# fs
+# ---------------------------------------------------------------------------
+
+FS_SHOW = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "mountPoint": "/",
+        "usedPercent": 34,
+        "used": 2048,
+        "total": 6144,
+        "timestamp": 1700000000000,
+    }
+]
+
+# ---------------------------------------------------------------------------
+# inventory
+# ---------------------------------------------------------------------------
+
+INVENTORY_SHOW = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "type": "supervisor",
+        "model": "VX",
+        "vendor": "Cumulus Networks",
+        "serial": "SN0001",
+        "status": "present",
+        "timestamp": 1700000000000,
+    }
+]
+
+# ---------------------------------------------------------------------------
+# lldp
+# ---------------------------------------------------------------------------
+
+LLDP_SHOW = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "ifname": "swp1",
+        "peerHostname": "spine01",
+        "peerIfname": "swp1",
+        "peerMacaddr": "bb:cc:dd:ee:ff:01",
+        "timestamp": 1700000000000,
+    }
+]
+
+# ---------------------------------------------------------------------------
+# mac
+# ---------------------------------------------------------------------------
+
+MAC_SHOW = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "vlan": 100,
+        "macaddr": "aa:bb:cc:dd:ee:ff",
+        "oif": "swp1",
+        "remoteVtepIp": "",
+        "flags": "dynamic",
+        "timestamp": 1700000000000,
+    }
+]
+
+# ---------------------------------------------------------------------------
+# mlag
+# ---------------------------------------------------------------------------
+
+MLAG_SHOW = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "state": "up",
+        "peerAddress": "169.254.1.2",
+        "peerLink": "peerlink",
+        "systemId": "44:38:39:ff:01:01",
+        "timestamp": 1700000000000,
+    }
+]
+
+# ---------------------------------------------------------------------------
+# namespace
+# ---------------------------------------------------------------------------
+
+NAMESPACE_SHOW = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "os": "cumulus",
+        "vendor": "Cumulus Networks",
+        "model": "VX",
+        "version": "4.4.0",
+        "timestamp": 1700000000000,
+    }
+]
+
+# ---------------------------------------------------------------------------
+# ospf
+# ---------------------------------------------------------------------------
+
+OSPF_SHOW = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "vrf": "default",
+        "ifname": "swp1",
+        "area": "0.0.0.0",
+        "state": "full",
+        "peerHostname": "spine01",
+        "timestamp": 1700000000000,
+    }
+]
+
+OSPF_ASSERT = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "vrf": "default",
+        "ifname": "swp1",
+        "assertReason": [],
+        "assert": "pass",
+        "timestamp": 1700000000000,
+    }
+]
+
+# ---------------------------------------------------------------------------
+# path
+# ---------------------------------------------------------------------------
+
+PATH_SHOW = [
+    {
+        "namespace": "datacenter1",
+        "hostname": "leaf01",
+        "vrf": "default",
+        "ifname": "swp1",
+        "nexthopIp": "10.1.0.1",
+        "ipLookup": "10.0.0.5",
+        "overlay": False,
+        "timestamp": 1700000000000,
+    }
+]
+
+# ---------------------------------------------------------------------------
 # sqPoller
 # ---------------------------------------------------------------------------
 
