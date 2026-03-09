@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "suzieq-api-wrapper"
+version = "0.1.0"
+description = "An unofficial Python 3 client for the SuzieQ REST API"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name = 'Richard "Chance" Newkirk', email = "chance.newkirk+github@pm.me" },
+]
+license = { file = "LICENSE" }
+keywords = ["suzieq", "network-observability", "rest", "api", "wrapper", "nms"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Telecommunications Industry",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: System :: Networking :: Monitoring",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+    "Typing :: Typed",
+]
+dependencies = [
+    "requests>=2.28",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "responses", "ruff", "mypy"]
+
+[project.urls]
+Repository = "https://github.com/cnewkirk/suzieq-api-wrapper"
+"Bug Tracker" = "https://github.com/cnewkirk/suzieq-api-wrapper/issues"
+Changelog = "https://github.com/cnewkirk/suzieq-api-wrapper/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["suzieq_api_wrapper*"]
+
+[tool.setuptools.package-data]
+suzieq_api_wrapper = ["py.typed"]
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.9"
+follow_imports = "skip"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
